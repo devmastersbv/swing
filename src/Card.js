@@ -187,7 +187,7 @@ const Card = (stack, targetElement, prepend) => {
         });
 
         global.addEventListener('touchmove', (event) => {
-          if (dragging) {
+          if (dragging && !config.allowTouchScrollMovement()) {
             event.preventDefault();
           }
         });
@@ -414,7 +414,8 @@ Card.makeConfig = (config = {}) => {
     rotation: Card.rotation,
     throwOutConfidence: Card.throwOutConfidence,
     throwOutDistance: Card.throwOutDistance,
-    transform: Card.transform
+    transform: Card.transform,
+    allowTouchScrollMovement: Card.allowTouchScrollMovement
   };
 
   return _.assign({}, defaultConfig, config);
@@ -533,6 +534,10 @@ Card.rotation = (coordinateX, coordinateY, element, maxRotation) => {
   const rotation = horizontalOffset * verticalOffset * maxRotation;
 
   return rotation;
+};
+
+Card.allowTouchScrollMovement = () => {
+  return false;
 };
 
 Card.THROW_IN = 'in';
