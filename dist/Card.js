@@ -203,6 +203,8 @@ var Card = function Card(stack, targetElement, prepend) {
         });
 
         global.addEventListener('touchmove', function (event) {
+          // eslint-disable-next-line no-console
+          console.log('Event', event, dragging, config.allowTouchScrollMovement);
           if (dragging && !config.allowTouchScrollMovement()) {
             event.preventDefault();
           }
@@ -421,6 +423,7 @@ Card.makeConfig = function () {
 
   var defaultConfig = {
     allowedDirections: [_Direction2.default.RIGHT, _Direction2.default.LEFT, _Direction2.default.UP],
+    allowTouchScrollMovement: Card.allowTouchScrollMovement,
     isThrowOut: Card.isThrowOut,
     maxRotation: 20,
     maxThrowOutDistance: 500,
@@ -428,11 +431,14 @@ Card.makeConfig = function () {
     rotation: Card.rotation,
     throwOutConfidence: Card.throwOutConfidence,
     throwOutDistance: Card.throwOutDistance,
-    transform: Card.transform,
-    allowTouchScrollMovement: Card.allowTouchScrollMovement
+    transform: Card.transform
   };
 
   return _lodash2.default.assign({}, defaultConfig, config);
+};
+
+Card.allowTouchScrollMovement = function () {
+  return false;
 };
 
 /**
@@ -548,10 +554,6 @@ Card.rotation = function (coordinateX, coordinateY, element, maxRotation) {
   var rotation = horizontalOffset * verticalOffset * maxRotation;
 
   return rotation;
-};
-
-Card.allowTouchScrollMovement = function () {
-  return false;
 };
 
 Card.THROW_IN = 'in';

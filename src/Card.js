@@ -187,6 +187,8 @@ const Card = (stack, targetElement, prepend) => {
         });
 
         global.addEventListener('touchmove', (event) => {
+          // eslint-disable-next-line no-console
+          console.log('Event', event, dragging, config.allowTouchScrollMovement);
           if (dragging && !config.allowTouchScrollMovement()) {
             event.preventDefault();
           }
