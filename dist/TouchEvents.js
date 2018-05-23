@@ -54,8 +54,11 @@ var TouchEvents = function TouchEvents(element) {
     touchWrapper.addEventListener("mousemove", move);
 
     var up = function up(e) {
-      if (!baseCoord || !dragged) return;
+      var c = baseCoord;
       baseCoord = null;
+
+      if (!c || !dragged) return;
+
       eventEmitter.trigger('panend', {
         deltaX: x,
         deltaY: y
