@@ -5,6 +5,8 @@ import rebound from 'rebound';
 import vendorPrefix from 'vendor-prefix';
 import raf from 'raf';
 import Direction from './Direction';
+import TouchEvents from './TouchEvents';
+
 import {
   elementChildren,
   isTouchDevice
@@ -87,16 +89,7 @@ const Card = (stack, targetElement, prepend) => {
 
     throwOutDistance = config.throwOutDistance(config.minThrowOutDistance, config.maxThrowOutDistance);
 
-    mc = new Hammer.Manager(targetElement, {
-      recognizers: [
-        [
-          Hammer.Pan,
-          {
-            threshold: 2
-          }
-        ]
-      ]
-    });
+    mc = TouchEvents(targetElement)
 
     if (prepend) {
       Card.prependToParent(targetElement);

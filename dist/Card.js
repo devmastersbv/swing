@@ -32,6 +32,10 @@ var _Direction = require('./Direction');
 
 var _Direction2 = _interopRequireDefault(_Direction);
 
+var _TouchEvents = require('./TouchEvents');
+
+var _TouchEvents2 = _interopRequireDefault(_TouchEvents);
+
 var _utilities = require('./utilities');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -113,11 +117,7 @@ var Card = function Card(stack, targetElement, prepend) {
 
     throwOutDistance = config.throwOutDistance(config.minThrowOutDistance, config.maxThrowOutDistance);
 
-    mc = new _hammerjs2.default.Manager(targetElement, {
-      recognizers: [[_hammerjs2.default.Pan, {
-        threshold: 2
-      }]]
-    });
+    mc = (0, _TouchEvents2.default)(targetElement);
 
     if (prepend) {
       Card.prependToParent(targetElement);
